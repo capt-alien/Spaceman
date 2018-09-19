@@ -78,36 +78,37 @@ def user_input (prompt):
 
 #Life Couter Function
 
-count = 0
+
 def life(count):
-    if count == 7
+    count = 0  # does this need to be changed for final product?
+    if count == 7:
         print("V")
         print("O")
-    if count == 6
+    if count == 6:
         print("V")
         print("O")
         print("|")
-    if count == 5
+    if count == 5:
         print(" V")
         print(" O")
         print(" |")
         print("/")
-    if count == 4
+    if count == 4:
         print(" V")
         print(" O")
         print(" |")
-        print("/ \")
-    if count == 3
+        print("/ \ ")
+    if count == 3:
         print(" V")
         print(" O")
         print("-|")
-        print("/ \ )
-    if count == 2
+        print("/ \ ")
+    if count == 2:
         print("|  V  |")
         print("|  O  |")
         print("| -|- |")
         print("| / \ |")
-    if count == 1
+    if count == 1:
         print("  ___   ")
         print(" /   \ ")
         print("|  V  |")
@@ -115,22 +116,23 @@ def life(count):
         print("| -|- |")
         print("| / \ |")
         print(" \___/")
-    if count == 0
+    if count == 0:
         print("Ahhhhh NOoooooOoooOOo!!!!")
-        print("  ___   ")
-        print(" /   \ ")
-        print("|  V  |")
-        print("|  O  |")
-        print("| -|- |")
-        print("| / \ |")
-        print(" \___/")
-        print("//||\\")
+        print("***___***   ")
+        print("**/   \**")
+        print("*|  V  |*")
+        print("*|  O  |*")
+        print("*| -|- |*")
+        print("*| / \ |*")
+        print("**\___/**")
+        print("*******")
         print("AIRLOCK ACTIVATED! YOU LOSE")
 
 
 def spaceman(secret_word):
     secret_word_ln = len(secret_word)  #saves lenght of string to objects
     letters_guessed = []
+    count = 8
 
 #Opening Text:
     print("Welcome to the Spaceman's Airlock")
@@ -139,6 +141,29 @@ def spaceman(secret_word):
     print("The passcode has %s charictors " % secret_word_ln)
     print("You have 7 guesses before the airlock automatically opens.")
 
+    while is_word_guessed(secret_word, letters_guessed) == false and count > 0:
+        guessed_letter = input("Guess a Letter HotShot ")
+        if guessed_letter not in letters_guessed:
+            letters_guessed.append(guessed_letter)
+            print("So far, you have guessed:{}".format(get_available_letters(letters_guessed))) #shows word with underscores for tcorrect letters in order
+            print("You are missing: {}".format(get_guessed_word(secret_word, letters_guessed)))
+            #Create if statement to determine if letters are correctly
+
+            if is_given_guess_correct(guessed_letter, secret_word):
+                print("Correct!")
+                life(count)
+                print(count)
+            else:
+                print("incorrect")
+                count -=1
+                life(count)
+                print(count)
+
+        else:
+            if count == 0:
+                print("AIRLOCK ACTIVATED. NooooOOoOooOo00oooo!!! The passcode was {}".format(secret_word))
+            else:
+                print("Im in!! Thank you human! Take me to your leader!")
 
 
 secret_word = load_word()
